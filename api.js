@@ -2,7 +2,6 @@ const HPAPI_URL='https://wizard-world-api.herokuapp.com';
 
 window.onload=async()=>{
     const wizards=await getAllWizards();
-    const elixirs= await getAllElixirs();
 
     const spinnerHtmlElement  = document.getElementById('spinner');
     spinnerHtmlElement.remove();
@@ -11,16 +10,16 @@ window.onload=async()=>{
         const mainHtmlElement = document.getElementById('main');
         const newElement = document.createElement('div');
         newElement.innerHTML=`<h2>${wizard.firstName}</h2>
-        <p>${wizard.getAllElixirs}</p>
+        <p>${wizard.getElixirs()}</p>
         `
         mainHtmlElement.appendChild(newElement);
-    }
-    for(const elixir of elixirs){
-        const mainHtmlElement2= document.getElementById('main');
-        const newButton = document.createElement('button');
-        newButton.innerText = elixir.name;
-        newButton.addEventListener('click', () => showElixirsDetails(elixir, newButton));
-        mainHtmlElement2.appendChild(newButton);
+        for(const elixir of wizards){
+            const mainHtmlElement2= document.getElementById('main');
+            const newButton = document.createElement('button');
+            newButton.innerText = wizard.getElixirs();
+            newButton.addEventListener('click', () => showElixirsDetails(elixir, newButton));
+            mainHtmlElement2.appendChild(newButton);
+        }
     }
     
 };
@@ -29,11 +28,12 @@ async function getAllWizards(){
     const data = await response.json();
     return data;
 }
-async function getAllElixirs(){
+async function getElixirs(){
     const response = await fetch(`${HPAPI_URL}/elixirs`);
     const data = await response.json();
     return data;
 }
+
 function showElixirsDetails(elixir, button){
     const mainHtml = document.getElementById('main');
     const detailsId = `details-${elixir.name}`;
