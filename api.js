@@ -1,12 +1,14 @@
 const HPAPI_URL='https://wizard-world-api.herokuapp.com';
 
+let destacarCasa;
+
 window.onload=async()=>{
     const wizards=await getAllWizards();
     const houses= await getAllHouses();
     
     const spinnerHtmlElement  = document.getElementById('spinner');
     spinnerHtmlElement.remove();
-
+    //Personas y elixires
     for(const wizard of wizards){
         const mainHtmlElement = document.getElementById('main');
         const newElement = document.createElement('div');
@@ -20,6 +22,7 @@ window.onload=async()=>{
             mainHtmlElement.appendChild(newButton);
         }
     }
+    //tabla para las casas 
     const table = document.createElement('table');
         for (let i = 0; i < houses.length; i += 2) {
             const fila = document.createElement('tr');
@@ -34,7 +37,10 @@ window.onload=async()=>{
             table.appendChild(fila);
         }
         document.getElementById('main').appendChild(table);
-    
+        //Destacar la casa que elige el usuario
+        destacarCasa=document.createElement('div');
+        destacarCasa.classList.add('destacarCasa');
+        document.body.appendChild(destacarCasa);
 };
 async function getAllWizards(){
     const response = await fetch(`${HPAPI_URL}/Wizards`);
@@ -70,6 +76,8 @@ async function getAllHouses(){
     return data;
 }
 function getImatgesHouses(houseName, container) {
+    const houseContainer = document.createElement('div');
+    houseContainer.classList.add('houseContainer');
     const img = document.createElement('img');
     if (houseName === "Gryffindor") {
         img.classList.add('Gryffindor');
@@ -84,5 +92,34 @@ function getImatgesHouses(houseName, container) {
         img.classList.add('Slytherin');
         img.src = 'https://1000logos.net/wp-content/uploads/2023/05/Slytherin-Logo.png';
     }
-    container.appendChild(img);
+    const newButton2 = document.createElement('button');
+    newButton2.classList.add('button2');
+    newButton2.innerHTML = "Destacar";
+    newButton2.addEventListener('click', () => mostraElementFlotant(houseName));
+
+    houseContainer.appendChild(img);
+    houseContainer.appendChild(newButton2);
+    container.appendChild(houseContainer);
+}
+function mostraElementFlotant(houseName){ //funcion para los botones de destacar casa
+    while (destacarCasa.firstChild){
+        destacarCasa.removeChild(destacarCasa.firstChild);
+    }
+
+    const destacarElement = document.createElement('div');
+    destacarElement.classList.add('destacarElement');
+    if (houseName === "Gryffindor") {
+        destacarElement.innerText="Soy de la casa: Gryffindor"
+        destacarElement.classList.add('destacarGryffindor');
+    } else if (houseName === "Ravenclaw") {
+        destacarElement.innerText="Soy de la casa: Ravenclaw"
+        destacarElement.classList.add('destacarRavenclaw');
+    } else if (houseName === "Hufflepuff") {
+        destacarElement.innerText="Soy de la casa: Hufflepuff"
+        destacarElement.classList.add('destacarHufflepuff');
+    } else if (houseName === "Slytherin") {
+        destacarElement.innerText="Soy de la casa: Slytherin"
+        destacarElement.classList.add('destacarSlytherin');
+    }
+    destacarCasa.appendChild(destacarElement);
 }

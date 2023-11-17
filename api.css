@@ -31,13 +31,19 @@ header h1{
       transform: rotate(360deg);
     }
 }
-.button{
+  .button{
     display: block;
     margin: auto; 
     margin-bottom: 10px;
-}
+    }
+.button2{
+    display: block;
+    margin: auto; 
+    margin-bottom: 10px;
+    align-items: center;
+ }
   /* Color boton sin poner ratón */
-button {
+  button {
     align-items: center;
     margin-bottom: 10px; 
     background-color: #c055ae; 
@@ -114,4 +120,53 @@ tr{
 table{
     border-collapse: collapse;
       width: 100%;
+}
+/*estilo del elemento flotante de los botones para destacar casa*/
+.destacarGryffindor{
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    display: block;
+    color:#8f1818;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-weight: bold;
+}
+.destacarRavenclaw{
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    display: block;
+    color:#20188f;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-weight: bold;
+}
+.destacarHufflepuff{
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    display: block;
+    color:rgb(184, 173, 21);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-weight: bold;
+}
+.destacarSlytherin{
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    display: block;
+    color:rgb(57, 116, 70);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-weight: bold;
 }
