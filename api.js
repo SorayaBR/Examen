@@ -14,7 +14,7 @@ window.onload=async()=>{
         for(const elixir of wizard.elixirs){
             const newButton = document.createElement('button')
             newButton.innerText=elixir.name;
-            newButton.addEventListener('click', () => showElixirIngredients(button, elixir.id));
+            newButton.addEventListener('click', () => showElixirIngredients(newButton, elixir.id));
             mainHtmlElement.appendChild(newButton);
         }
     }
@@ -36,11 +36,15 @@ async function showElixirIngredients(button, elixirId){
     const detailsId = `details-${elixirId.name}`;
     const detailsHtml = document.getElementById(detailsId);
     if(!detailsHtml){
-        
-    }
-    const newElement = document.createElement('div');
+        const newDetails = document.createElement('div');
+        newDetails.id = detailsId;
+        newDetails.className = 'elixirId-details';
         for (const ingredient of elixir.ingredients){
-            return newElement.innerHTML +=`<p>${ingredient.name}</p>`;
+            newDetails.innerHTML +=`<p>${ingredient.name}</p>`;
+            mainHtmlElement.appendChild(newDetails);
         }
-    mainHtmlElement.appendChild(newElement);
+        button.parentNode.insertBefore(newDetails, button.nextSibling);
+    }else{
+        detailsHtml.parentNode.removeChild(detailsHtml);
+    }
 }
