@@ -1,12 +1,14 @@
+/* Titulo */
 header h1{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     color:rgb(85, 11, 85);
   }
+  /* Spinner */
 .loader{
     width: 48px;
   height: 48px;
   border: 5px solid #FFF;
-  border-bottom-color: #FF3D00;
+  border-bottom-color: rgba(56, 255, 255, 0.733);
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;
@@ -21,27 +23,48 @@ header h1{
       transform: rotate(360deg);
     }
   }
+  /* Color boton sin poner ratón */
   button {
     display: block;
-    margin-bottom: 10px; /* Ajusta el margen entre los botones */
-    background-color: #c055ae; /* Color de fondo verde */
-    color: white; /* Color de texto blanco */
-    padding: 10px; /* Espaciado interno del botón */
-    border: none; /* Sin borde */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cursor apuntador al pasar el ratón sobre el botón */
+    margin-bottom: 10px; 
+    background-color: #c055ae; 
+    color: white; 
+    padding: 10px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
 }
+/* Color contenido del boton */
 .elixirs-details {
-  margin-top: 10px; /* Ajusta el margen según sea necesario */
+  margin-top: 10px; 
   padding: 10px;
   border: 1px solid #ccc;
-  background-color: #f9f9f9; /* Fondo gris claro */
+  background-color: #f9f9f9; 
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size:small;
 }
-/* Estilo para resaltar el botón al pasar el ratón */
+/* Color botón al pasar el ratón */
 button:hover {
   background-color: #b11e85;
+}
+/* Editar imagenes casas */
+@media screen and (max-width: 600px) {
+    img {
+      max-width: 200px;
+      object-fit: cover;
+    }
+  }
+#Ravenclaw{
+    max-width: 200px;
+    height: auto; 
+}
+img #Hufflepuff{
+    max-width: 200px;
+    height: auto; 
+}
+img #Slytherin{
+    max-width: 200px;
+    height: auto; 
 }

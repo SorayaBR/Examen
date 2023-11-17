@@ -24,6 +24,7 @@ window.onload=async()=>{
         const newElement2 = document.createElement('div');
         newElement2.innerHTML=`<h2>${house.name}</h2>`;
         mainHtmlElement2.appendChild(newElement2);
+        getImatgesHouses(house.name, newElement2);
     }
     
 };
@@ -59,4 +60,18 @@ async function getAllHouses(){
     const response = await fetch(`${HPAPI_URL}/Houses`);
     const data = await response.json();
     return data;
+}
+function getImatgesHouses(houseName, container) {
+    const img = document.createElement('img');
+
+    if (houseName === "Gryffindor") {
+        img.src = 'https://1000marcas.net/wp-content/uploads/2021/11/Gryffindor-Logo-500x281.png';
+    } else if (houseName === "Ravenclaw") {
+        img.src = 'https://www.redwolf.in/image/catalog/stickers/harry-potter-ravenclaw-crest-sticker-india.jpg';
+    } else if (houseName === "Hufflepuff") {
+        img.src = 'https://i.pinimg.com/originals/e0/e2/bc/e0e2bca469b63385d89ec2f1250e4ca5.png';
+    } else if (houseName === "Slytherin") {
+        img.src = 'https://1000logos.net/wp-content/uploads/2023/05/Slytherin-Logo.png';
+    }
+    container.appendChild(img);
 }
