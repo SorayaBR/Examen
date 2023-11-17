@@ -1,3 +1,8 @@
+*{
+    font-family:sans-serif;
+    margin: 0;
+    padding: 0;
+}
 /* Titulo */
 header h1{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -56,15 +61,19 @@ button:hover {
       object-fit: cover;
     }
   }
-#Ravenclaw{
-    max-width: 200px;
-    height: auto; 
+  .Gryffindor{
+    max-width: 300px;
+    object-fit: cover;
 }
-img #Hufflepuff{
-    max-width: 200px;
-    height: auto; 
+.Ravenclaw{
+    max-width: 250px;
+    object-fit: cover;
 }
-img #Slytherin{
-    max-width: 200px;
-    height: auto; 
+.Hufflepuff{
+    max-width: 175px;
+    object-fit: cover;
+}
+.Slytherin{
+    max-width: 350px;
+    object-fit: cover;
 }

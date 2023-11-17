@@ -19,13 +19,20 @@ window.onload=async()=>{
             mainHtmlElement.appendChild(newButton);
         }
     }
-    for(const house of houses){
-        const mainHtmlElement2 = document.getElementById('main');
-        const newElement2 = document.createElement('div');
-        newElement2.innerHTML=`<h2>${house.name}</h2>`;
-        mainHtmlElement2.appendChild(newElement2);
-        getImatgesHouses(house.name, newElement2);
-    }
+    const table = document.createElement('table');
+        for (let i = 0; i < houses.length; i += 2) {
+            const fila = document.createElement('tr');
+            for (let j = 0; j < 2 && i + j < houses.length; j++) {
+                const index = i + j;
+                const house = houses[index];
+                const element = document.createElement('td');
+                element.innerHTML = `<h2>${house.name}</h2>`;
+                getImatgesHouses(house.name, element);
+                fila.appendChild(element);
+            }
+            table.appendChild(fila);
+        }
+        document.getElementById('main').appendChild(table);
     
 };
 async function getAllWizards(){
@@ -63,14 +70,17 @@ async function getAllHouses(){
 }
 function getImatgesHouses(houseName, container) {
     const img = document.createElement('img');
-
     if (houseName === "Gryffindor") {
+        img.classList.add('Gryffindor');
         img.src = 'https://1000marcas.net/wp-content/uploads/2021/11/Gryffindor-Logo-500x281.png';
     } else if (houseName === "Ravenclaw") {
+        img.classList.add('Ravenclaw');
         img.src = 'https://www.redwolf.in/image/catalog/stickers/harry-potter-ravenclaw-crest-sticker-india.jpg';
     } else if (houseName === "Hufflepuff") {
+        img.classList.add('Hufflepuff');
         img.src = 'https://i.pinimg.com/originals/e0/e2/bc/e0e2bca469b63385d89ec2f1250e4ca5.png';
     } else if (houseName === "Slytherin") {
+        img.classList.add('Slytherin');
         img.src = 'https://1000logos.net/wp-content/uploads/2023/05/Slytherin-Logo.png';
     }
     container.appendChild(img);
