@@ -2,8 +2,7 @@ const HPAPI_URL='https://wizard-world-api.herokuapp.com';
 
 window.onload=async()=>{
     const wizards=await getAllWizards();
-    const elixirs=await getAllElixirs();
-
+    
     const spinnerHtmlElement  = document.getElementById('spinner');
     spinnerHtmlElement.remove();
 
@@ -15,7 +14,7 @@ window.onload=async()=>{
         for(const elixir of wizard.elixirs){
             const newButton = document.createElement('button')
             newButton.innerText=elixir.name;
-            newButton.addEventListener('click', () => showElixirIngredients(elixir, newButton));
+            newButton.addEventListener('click', () => showElixirIngredients(button, elixir.id));
             mainHtmlElement.appendChild(newButton);
         }
     }
@@ -26,29 +25,22 @@ async function getAllWizards(){
     const data = await response.json();
     return data;
 }
-async function getAllElixirs(){
-    const response = await fetch(`${HPAPI_URL}/Elixirs`);
+async function getElixir(elixirId){
+    const response = await fetch(`${HPAPI_URL}/Elixirs/${elixirId}`);
     const data = await response.json();
     return data;
 }
-function showElixirIngredients(wizard, elixir, button){
-    const mainHtml = document.getElementById('main');
-    const detailsId = `details-${elixir.name}`;
+async function showElixirIngredients(button, elixirId){
+    const elixir=await getElixir(elixirId);
+    const mainHtmlElement = document.getElementById('main');
+    const detailsId = `details-${elixirId.name}`;
     const detailsHtml = document.getElementById(detailsId);
-
-    if (!detailsHtml) {
-        // Si no existe, crea un nuevo elemento details
-        const newDetails = document.createElement('div');
-        newDetails.id = detailsId;
-        newDetails.className = 'elixirs-details';
-        for (const ingredient of elixirs){
-            newDetails.innerHTML +=`<p>${ingredient.ingredients}</p>`;
-        }
-
-        // Agrega el nuevo elemento details debajo del botón
-        button.parentNode.insertBefore(newDetails, button.nextSibling);
-    } else {
-        // Si ya existe, elimina el elemento details
-        detailsHtml.parentNode.removeChild(detailsHtml);
+    if(!detailsHtml){
+        
     }
+    const newElement = document.createElement('div');
+        for (const ingredient of elixir.ingredients){
+            return newElement.innerHTML +=`<p>${ingredient.name}</p>`;
+        }
+    mainHtmlElement.appendChild(newElement);
 }
