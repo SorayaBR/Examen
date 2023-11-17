@@ -2,6 +2,7 @@ const HPAPI_URL='https://wizard-world-api.herokuapp.com';
 
 window.onload=async()=>{
     const wizards=await getAllWizards();
+    const houses= await getAllHouses();
     
     const spinnerHtmlElement  = document.getElementById('spinner');
     spinnerHtmlElement.remove();
@@ -17,6 +18,12 @@ window.onload=async()=>{
             newButton.addEventListener('click', () => showElixirIngredients(newButton, elixir.id));
             mainHtmlElement.appendChild(newButton);
         }
+    }
+    for(const house of houses){
+        const mainHtmlElement2 = document.getElementById('main');
+        const newElement2 = document.createElement('div');
+        newElement2.innerHTML=`<h2>${house.name}</h2>`;
+        mainHtmlElement2.appendChild(newElement2);
     }
     
 };
@@ -47,4 +54,9 @@ async function showElixirIngredients(button, elixirId){
     }else{
         detailsHtml.parentNode.removeChild(detailsHtml);
     }
+}
+async function getAllHouses(){
+    const response = await fetch(`${HPAPI_URL}/Houses`);
+    const data = await response.json();
+    return data;
 }
