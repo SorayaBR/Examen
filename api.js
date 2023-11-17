@@ -6,10 +6,17 @@ window.onload = async()=>{
     for(const character of characters){
         const mainHtmlElement=document.getElementById('main');
         const newElement = document.createElement('div');
-        newElement.innerHTML=`<h2${character.name}</h2>`;
+        newElement.innerHTML=`<h2${character.lastname}</h2>`;
         mainHtmlElement.appendChild(newElement);
     }
 };
 async function getAllHPCharacters(){
-    const response = await fetch(`${HPAPI_URL}/`)
+    const response = await fetch(`${HPAPI_URL}/wizards`);
+    const data=await response.json();
+    return data.results;
+}
+async function getAll(){
+    const response = await fetch(`${POKEAPI_URL}/Elixirs`);
+    const data = await response.json();
+    return data.results;
 }
