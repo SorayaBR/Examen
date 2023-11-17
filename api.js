@@ -14,6 +14,7 @@ window.onload=async()=>{
         mainHtmlElement.appendChild(newElement);
         for(const elixir of wizard.elixirs){
             const newButton = document.createElement('button')
+            newButton.classList.add('button');
             newButton.innerText=elixir.name;
             newButton.addEventListener('click', () => showElixirIngredients(newButton, elixir.id));
             mainHtmlElement.appendChild(newButton);
