@@ -75,7 +75,7 @@ function getImatgesHouses(houseName, container) {
         img.src = 'https://1000marcas.net/wp-content/uploads/2021/11/Gryffindor-Logo-500x281.png';
     } else if (houseName === "Ravenclaw") {
         img.classList.add('Ravenclaw');
-        img.src = 'https://www.redwolf.in/image/catalog/stickers/harry-potter-ravenclaw-crest-sticker-india.jpg';
+        img.src = 'https://freepngimg.com/convert-png/111661-house-ravenclaw-png-free-photo';
     } else if (houseName === "Hufflepuff") {
         img.classList.add('Hufflepuff');
         img.src = 'https://i.pinimg.com/originals/e0/e2/bc/e0e2bca469b63385d89ec2f1250e4ca5.png';
