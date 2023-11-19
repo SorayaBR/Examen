@@ -66,7 +66,7 @@ window.onload=async()=>{
     destacarCasa=document.createElement('div');
     document.body.appendChild(destacarCasa);
 
-    //encantamientos solo pongo 10 porque hay demasiados :)
+    //encantamientos solo pongo 4 porque hay demasiados :)
         const titol = document.createElement('div');
         titol.classList.add('titolEncanteris');
         titol.innerText = `Prova la magia`;
@@ -77,7 +77,7 @@ window.onload=async()=>{
             const buttonSpells = document.createElement('button')
             buttonSpells.classList.add('buttonSpells');
             buttonSpells.innerText=spell;
-            buttonSpells.addEventListener('click', () => showMagicEffects( spells[c].name, element));
+            buttonSpells.addEventListener('click', () => showMagicEffects( spells[c].name, element, spells[c].id));
             element.appendChild(buttonSpells);
             mainHtmlElement.appendChild(element);
         }
@@ -181,40 +181,51 @@ async function getAllSpells(){
     const data = await response.json();
     return data;
 }
-function showMagicEffects(spellName, element){
+function showMagicEffects(spellName, element, spellId){
     const spellsContainer = document.createElement('div');
     spellsContainer.classList.add('SpellsContainer');
     const img=document.createElement('img');
-
-    if (spellName === "Opening Charm") {
-        img.src = 'imagenes/puerta1.jpg';
-        spellsContainer.appendChild(img);
-        element.appendChild(spellsContainer);
-        setTimeout(() => {
-            img.src='imagenes/puerta2.jpg';
-            setTimeout(()=>{
-                img.src='imagenes/puerta3.jpg';
+    const detailsId = `details-${spellId}`;
+    let detailsHtml = document.getElementById(detailsId);
+    if(!detailsHtml){
+        detailsHtml=document.createElement('div');
+        detailsHtml.id=detailsId;
+        spellsContainer.appendChild(detailsHtml);
+        if (spellName === "Opening Charm") {
+            img.src = 'imagenes/puerta1.jpg';
+            spellsContainer.appendChild(img);
+            element.appendChild(spellsContainer);
+            setTimeout(() => {
+                img.src='imagenes/puerta2.jpg';
                 setTimeout(()=>{
-                    element.removeChild(spellsContainer);
-                }, 2000);
+                    img.src='imagenes/puerta3.jpg';
+                    setTimeout(()=>{
+                        element.removeChild(spellsContainer);
+                    }, 2000);
+                }, 500);
             }, 500);
-        }, 500);
-    } else if (spellName === "Water-Making Spell") {
-        encantoAgua();
-    } else if (spellName === "Alarte Ascendare") {
-        img.src='imagenes/cohete.gif';
-        spellsContainer.appendChild(img);
-        element.appendChild(spellsContainer);
-        setTimeout(()=>{
-            element.removeChild(spellsContainer);
-        }, 3000);
-    } else if (spellName === "Animagus Spell") {
-        img.src='imagenes/animagus.jpeg';
-        spellsContainer.appendChild(img);
-        element.appendChild(spellsContainer);
-        setTimeout(()=>{
-            element.removeChild(spellsContainer);
-        }, 2000);
+            img.classList.add('puertas');
+        } else if (spellName === "Water-Making Spell") {
+            encantoAgua();
+        } else if (spellName === "Alarte Ascendare") {
+            img.src='imagenes/cohete.gif';
+            spellsContainer.appendChild(img);
+            element.appendChild(spellsContainer);
+            setTimeout(()=>{
+                element.removeChild(spellsContainer);
+            }, 3000);
+            img.classList.add('cohete');
+        } else if (spellName === "Animagus Spell") {
+            img.src='imagenes/animagus.jpeg';
+            spellsContainer.appendChild(img);
+            element.appendChild(spellsContainer);
+            setTimeout(()=>{
+                element.removeChild(spellsContainer);
+            }, 2000);
+            img.classList.add('gatito');
+        }
+    }else{
+        detailsHtml.parentNode.removeChild(detailsHtml);
     }
 }
 function encantoAgua() {

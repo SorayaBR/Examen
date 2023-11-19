@@ -83,7 +83,7 @@ header h1{
   .buttonElixirs {
     align-items: center;
     margin-bottom: 10px; 
-    background-color: #c055ae; 
+    background-color: #8a1414; 
     color: white; 
     padding: 10px; 
     border: none; 
@@ -94,7 +94,7 @@ header h1{
 }
 /* Color botón al pasar el ratón */
 .buttonElixirs:hover {
-  background-color: #b11e85;
+  background-color: #3a0606;
 }
 /* Editar imagenes casas */
 @media screen and (max-width: 600px) {
@@ -147,10 +147,11 @@ tr{
 }
 table{
       width: 100%;
+      background: #838383;
 }
 /*estilo para los botones y elemento flotante destacar persona*/
 .buttonDestPers {
-  background-color: cornflowerblue; 
+  background-color: rgb(51, 74, 117); 
   color: white; 
   padding: 10px; 
   border: none; 
@@ -161,17 +162,17 @@ table{
   margin: 10px;
 }
 .buttonDestPers:hover{
-  background-color:rgb(47, 47, 116);
+  background-color:rgb(17, 17, 49);
 }
 .destacarPersona{
     position:fixed;
     top: 10px;
-    color:rgb(216, 19, 141);
+    color:rgb(193, 19, 216);
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: rgb(0, 0, 0);
     border-radius: 5px;
     font-weight: bold;
-    box-shadow: 0 0 20px rgb(216, 19, 141);
+    box-shadow: 0 0 20px rgb(193, 19, 216);
     width: 100px; 
     text-align: center;
     margin: auto;
@@ -269,4 +270,44 @@ table{
     text-align: center;
     margin: auto;
     font-size: small;
+}
+/*encantamientos*/
+.buttonSpells{
+    align-items: center;
+    margin-bottom: 10px; 
+    background-color: #4dca27; 
+    color: rgb(0, 0, 0);
+    padding: 10px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    padding: 10px;
+    margin: 10px;
+}
+.buttonSpells:hover {
+  background-color: #217239;
+}
+.SpellsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.puertas{
+    max-width: 200px;
+}
+.cohete{
+    max-width: 200px;
+}
+.gatito{
+    max-width: 200px;
+}
+.titolEncanteris{
+    color: #39b31a;
+    font-size: xx-large;
+    font-family:fantasy;
+    box-shadow: #3a3d3a 10px 10px 20px;
+    padding: 10px;
+    background-color: rgb(59, 61, 59);
 }
