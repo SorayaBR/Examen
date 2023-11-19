@@ -9,38 +9,61 @@ window.onload=async()=>{
     const spinnerHtmlElement  = document.getElementById('spinner');
     spinnerHtmlElement.remove();
     //Personas y elixires
+    const headerHtmlElement = document.getElementById('header');
+    const logo = document.createElement('div');
+    logo.id = 'logo';
+    const img = document.createElement('img');
+    img.src = 'https://www.linformaldesign.com/shop/wp-content/uploads/2021/03/harry-potter-logo-300x125.png';
+    logo.appendChild(img);
+    headerHtmlElement.appendChild(logo);
+
+    const mainHtmlElement = document.getElementById('main');
     for(const wizard of wizards){
-        const mainHtmlElement = document.getElementById('main');
         const newElement = document.createElement('div');
-        newElement.innerHTML=`<h2>${wizard.firstName}</h2>`;
-        mainHtmlElement.appendChild(newElement);
+        newElement.classList.add('Wizards');
+
+        const nameCont = document.createElement('div');
+        nameCont.classList.add('nameCont');
+        nameCont.innerHTML = `<h2>${wizard.firstName}</h2>`;
+
+        const newButtonDestPers = document.createElement('button');
+        newButtonDestPers.classList.add('buttonDestPers');
+        newButtonDestPers.innerHTML = "Destacar";
+        newButtonDestPers.addEventListener('click', () => mostraElementFlotantPers(wizard.firstName));
+       
+        nameCont.appendChild(newButtonDestPers);
+        newElement.appendChild(nameCont);
+        mainHtmlElement.appendChild(newElement)
+
         for(const elixir of wizard.elixirs){
             const newButton = document.createElement('button')
-            newButton.classList.add('button');
+            newButton.classList.add('buttonElixirs');
             newButton.innerText=elixir.name;
             newButton.addEventListener('click', () => showElixirIngredients(newButton, elixir.id));
             mainHtmlElement.appendChild(newButton);
         }
     }
+    //Destacar personaje que elige el usuario
+    destacarPersona=document.createElement('div');
+    document.body.appendChild(destacarPersona);
     //tabla para las casas 
     const table = document.createElement('table');
         for (let i = 0; i < houses.length; i += 2) {
-            const fila = document.createElement('tr');
+            const fila = document.createElement('tr'); //fila
             for (let j = 0; j < 2 && i + j < houses.length; j++) {
                 const index = i + j;
                 const house = houses[index];
-                const element = document.createElement('td');
+                const element = document.createElement('td'); //columna
                 element.innerHTML = `<h2>${house.name}</h2>`;
                 getImatgesHouses(house.name, element);
                 fila.appendChild(element);
             }
             table.appendChild(fila);
         }
-        document.getElementById('main').appendChild(table);
-        //Destacar la casa que elige el usuario
-        destacarCasa=document.createElement('div');
-        destacarCasa.classList.add('destacarCasa');
-        document.body.appendChild(destacarCasa);
+    document.getElementById('main').appendChild(table);
+    //Destacar la casa que elige el usuario
+    destacarCasa=document.createElement('div');
+    document.body.appendChild(destacarCasa);
 };
 async function getAllWizards(){
     const response = await fetch(`${HPAPI_URL}/Wizards`);
@@ -55,17 +78,16 @@ async function getElixir(elixirId){
 async function showElixirIngredients(button, elixirId){
     const elixir=await getElixir(elixirId);
     const mainHtmlElement = document.getElementById('main');
-    const detailsId = `details-${elixirId.name}`;
-    const detailsHtml = document.getElementById(detailsId);
+    const detailsId = `details-${elixirId}`;
+    let detailsHtml = document.getElementById(detailsId);
     if(!detailsHtml){
-        const newDetails = document.createElement('div');
-        newDetails.id = detailsId;
-        newDetails.className = 'elixirId-details';
+        detailsHtml=document.createElement('div');
+        detailsHtml.id=detailsId;
+        mainHtmlElement.appendChild(detailsHtml);
         for (const ingredient of elixir.ingredients){
-            newDetails.innerHTML +=`<p>${ingredient.name}</p>`;
-            mainHtmlElement.appendChild(newDetails);
+            detailsHtml.innerHTML +=`<p>${ingredient.name}</p>`;
         }
-        button.parentNode.insertBefore(newDetails, button.nextSibling);
+        button.parentNode.insertBefore(detailsHtml, button.nextSibling);
     }else{
         detailsHtml.parentNode.removeChild(detailsHtml);
     }
@@ -92,14 +114,28 @@ function getImatgesHouses(houseName, container) {
         img.classList.add('Slytherin');
         img.src = 'https://1000logos.net/wp-content/uploads/2023/05/Slytherin-Logo.png';
     }
-    const newButton2 = document.createElement('button');
-    newButton2.classList.add('button2');
-    newButton2.innerHTML = "Destacar";
-    newButton2.addEventListener('click', () => mostraElementFlotant(houseName));
+    const newButtonDestCasa = document.createElement('button');
+    newButtonDestCasa.classList.add('buttonDestCasa');
+    newButtonDestCasa.innerHTML = "Destacar";
+    newButtonDestCasa.addEventListener('click', () => mostraElementFlotant(houseName));
 
     houseContainer.appendChild(img);
-    houseContainer.appendChild(newButton2);
+    houseContainer.appendChild(newButtonDestCasa);
     container.appendChild(houseContainer);
+}
+function mostraElementFlotantPers(wizardName){
+    while (destacarPersona.firstChild){
+        destacarPersona.removeChild(destacarPersona.firstChild);
+    }
+    const destacarElement = document.createElement('div');
+    if (wizardName !== null) {
+        destacarElement.innerText="Personaje favorito: "+wizardName;
+        destacarElement.classList.add('destacarPersona');
+    } else {
+        destacarElement.innerText="Ningun personaje destacado";
+        destacarElement.classList.add('destacarPersona');
+    }
+    destacarPersona.appendChild(destacarElement);
 }
 function mostraElementFlotant(houseName){ //funcion para los botones de destacar casa
     while (destacarCasa.firstChild){
@@ -107,7 +143,6 @@ function mostraElementFlotant(houseName){ //funcion para los botones de destacar
     }
 
     const destacarElement = document.createElement('div');
-    destacarElement.classList.add('destacarElement');
     if (houseName === "Gryffindor") {
         destacarElement.innerText="Soy de la casa: Gryffindor"
         destacarElement.classList.add('destacarGryffindor');
