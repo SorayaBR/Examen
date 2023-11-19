@@ -115,16 +115,16 @@ img.Gryffindor{
     
 }
 img.Ravenclaw{
-    max-width: 150px;
+    max-width: 230px;
     height: auto;
 }
 img.Slytherin{
-    max-width: 300px;
+    max-width: 230px;
     height: auto;
     
 }
 img.Hufflepuff{
-    max-width: 130px;
+    max-width: 230px;
     height: auto;
     
 }

@@ -5,6 +5,7 @@ let destacarCasa;
 window.onload=async()=>{
     const wizards=await getAllWizards();
     const houses= await getAllHouses();
+    const spells= await getAllSpells();
     
     const spinnerHtmlElement  = document.getElementById('spinner');
     spinnerHtmlElement.remove();
@@ -64,6 +65,23 @@ window.onload=async()=>{
     //Destacar la casa que elige el usuario
     destacarCasa=document.createElement('div');
     document.body.appendChild(destacarCasa);
+
+    //encantamientos solo pongo 10 porque hay demasiados :)
+        const titol = document.createElement('div');
+        titol.classList.add('titolEncanteris');
+        titol.innerText = `Prova la magia`;
+        mainHtmlElement.appendChild(titol);
+        for(let c=0; c<4; c+=1){
+            let spell= spells[c].name;
+            const element=document.createElement('div');
+            const buttonSpells = document.createElement('button')
+            buttonSpells.classList.add('buttonSpells');
+            buttonSpells.innerText=spell;
+            buttonSpells.addEventListener('click', () => showMagicEffects( spells[c].name, element));
+            element.appendChild(buttonSpells);
+            mainHtmlElement.appendChild(element);
+        }
+
 };
 async function getAllWizards(){
     const response = await fetch(`${HPAPI_URL}/Wizards`);
@@ -103,16 +121,16 @@ function getImatgesHouses(houseName, container) {
     const img = document.createElement('img');
     if (houseName === "Gryffindor") {
         img.classList.add('Gryffindor');
-        img.src = 'https://1000marcas.net/wp-content/uploads/2021/11/Gryffindor-Logo-500x281.png';
+        img.src = 'imagenes/gryffindor.jpg';
     } else if (houseName === "Ravenclaw") {
         img.classList.add('Ravenclaw');
-        img.src = 'https://freepngimg.com/convert-png/111661-house-ravenclaw-png-free-photo';
+        img.src = 'imagenes/ravenclaw.jpg';
     } else if (houseName === "Hufflepuff") {
         img.classList.add('Hufflepuff');
-        img.src = 'https://i.pinimg.com/originals/e0/e2/bc/e0e2bca469b63385d89ec2f1250e4ca5.png';
+        img.src = 'imagenes/hufflepuff.jpg';
     } else if (houseName === "Slytherin") {
         img.classList.add('Slytherin');
-        img.src = 'https://1000logos.net/wp-content/uploads/2023/05/Slytherin-Logo.png';
+        img.src = 'imagenes/slytherin.jpg';
     }
     const newButtonDestCasa = document.createElement('button');
     newButtonDestCasa.classList.add('buttonDestCasa');
@@ -158,3 +176,52 @@ function mostraElementFlotant(houseName){ //funcion para los botones de destacar
     }
     destacarCasa.appendChild(destacarElement);
 }
+async function getAllSpells(){
+    const response = await fetch(`${HPAPI_URL}/Spells`);
+    const data = await response.json();
+    return data;
+}
+function showMagicEffects(spellName, element){
+    const spellsContainer = document.createElement('div');
+    spellsContainer.classList.add('SpellsContainer');
+    const img=document.createElement('img');
+
+    if (spellName === "Opening Charm") {
+        img.src = 'imagenes/puerta1.jpg';
+        spellsContainer.appendChild(img);
+        element.appendChild(spellsContainer);
+        setTimeout(() => {
+            img.src='imagenes/puerta2.jpg';
+            setTimeout(()=>{
+                img.src='imagenes/puerta3.jpg';
+                setTimeout(()=>{
+                    element.removeChild(spellsContainer);
+                }, 2000);
+            }, 500);
+        }, 500);
+    } else if (spellName === "Water-Making Spell") {
+        encantoAgua();
+    } else if (spellName === "Alarte Ascendare") {
+        img.src='imagenes/cohete.gif';
+        spellsContainer.appendChild(img);
+        element.appendChild(spellsContainer);
+        setTimeout(()=>{
+            element.removeChild(spellsContainer);
+        }, 3000);
+    } else if (spellName === "Animagus Spell") {
+        img.src='imagenes/animagus.jpeg';
+        spellsContainer.appendChild(img);
+        element.appendChild(spellsContainer);
+        setTimeout(()=>{
+            element.removeChild(spellsContainer);
+        }, 2000);
+    }
+}
+function encantoAgua() {
+    document.body.style.backgroundColor ='navy';
+        setTimeout(()=>{
+            document.body.style.backgroundColor='white';
+            
+        }, 3000);
+  }
+  
